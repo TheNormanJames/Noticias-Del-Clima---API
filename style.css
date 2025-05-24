@@ -194,7 +194,7 @@ li {
  }
 }
 
-.contenedor-pcL {
+.container-pcL {
  width: min(90%, 1500px);
  margin-inline: auto;
 }
@@ -660,6 +660,12 @@ li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-height: 105px;
+
+  img {
+   width: 100%;
+   max-width: 60px;
+  }
  }
 
  .weatherDetails__dayName {
@@ -675,6 +681,167 @@ li {
 }
 
 /* #endregion //! sectionAPI */
+
+/*------------------------------------------------*/
+/* #region //* NewsLetter */
+.newsletter {
+ background-color: var(--color-clima-accent);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ min-height: auto;
+
+ padding-block: 100px;
+
+
+ .newsletter__title {
+  font-family: var(--ff2);
+  text-transform: uppercase;
+  font-size: clamp(var(--fzl), 2vw + .5rem, var(--fzx));
+  color: var(--color-neutro-bg);
+  margin-bottom: .5em;
+ }
+
+ .newsletterInput {
+  padding: .9em;
+  border-radius: 20px;
+  width: min(90%, 740px);
+
+  &::placeholder {
+   text-align: center;
+   opacity: 0.5;
+  }
+ }
+}
+
+
+/* #endregion //! NewsLetter */
+
+
+/*------------------------------------------------*/
+/* #region //* Footer */
+
+.footer {
+ background: #2A7B9B;
+ background: linear-gradient(180deg, var(--color-azul-900) 20%, var(--color-neutro-bgDark) 120%);
+ padding-top: 100px;
+
+ >div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+ }
+
+ .footer__textContent {
+  color: var(--color-neutro-bg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .footer__subTitle {
+  text-transform: uppercase;
+  font-size: clamp(var(--fzm), 2vw + .5rem, var(--fzm));
+ }
+
+ .footer__title {
+  font-family: var(--ff2);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: clamp(var(--fzxxl), 2vw + .5rem, var(--fzbig));
+  margin-bottom: .2em;
+  line-height: 1;
+ }
+
+ .btn {
+  margin-bottom: 3em;
+
+  &::before {
+   display: none;
+  }
+ }
+
+ .footer__img {
+  width: min(90%, 300px);
+ }
+
+ .footer__bottomBanner {
+  background-color: #181818;
+  padding-block: 64px;
+
+  margin-top: 100px;
+
+  @media screen and (min-width: 768px) {
+   padding-block: 32px;
+
+  }
+
+
+  &>div {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   color: var(--color-neutro-bg);
+   gap: 2rem;
+
+   @media screen and (min-width: 768px) {
+    align-items: center;
+    flex-direction: row;
+   }
+  }
+
+  .footer__menuList {
+   display: flex;
+   gap: 1rem;
+   flex-direction: column;
+   text-transform: uppercase;
+   font-family: var(--ff2);
+   font-weight: 500;
+
+   @media screen and (min-width: 768px) {
+    flex-direction: row;
+
+   }
+  }
+
+  .footer__menuItem {}
+
+  .footer__rights {
+   position: relative;
+   text-transform: uppercase;
+   font-family: var(--ff2);
+   font-weight: 500;
+
+   .rights {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+   }
+
+   &::before {
+    position: absolute;
+    top: -20px;
+    content: '';
+    height: 1px;
+    width: 50px;
+    background: currentColor;
+    display: block;
+
+    @media screen and (min-width: 768px) {
+     display: none;
+    }
+   }
+
+  }
+ }
+}
+
+/* #endregion //! Footer */
 
 /*------------------------------------------------*/
 /* #region //* customClases */
