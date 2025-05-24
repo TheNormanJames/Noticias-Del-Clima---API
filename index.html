@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Afacad:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <meta name="description" content="Aquí_va_la_Description" />
     <script src="index.js" type="module" defer></script>
@@ -11,7 +17,7 @@
   </head>
   <body>
     <nav class="mainNav">
-      <ul class="mainNav__list">
+      <ul class="mainNav__list textShadow noMobile">
         <li class="mainNav__item">
           <a href="#SobreNosotros">Sobre Nosotros</a>
         </li>
@@ -25,6 +31,45 @@
         </li>
         <li class="mainNav__item"><a href="#Blog">Blog</a></li>
       </ul>
+      <div class="mainNav__mobile noPc">
+        <a href="#SobreNosotros"
+          ><img
+            class="mainNav__logo"
+            src="./assets/logo.png"
+            alt="Logo principal del proyecto"
+        /></a>
+        <img
+          class="mainNav__hamburger"
+          src="./assets/icons/hamburger.svg"
+          alt="Icono de Hamburguesa"
+          id="mainNav__hamburger"
+        />
+      </div>
+      <ul id="mainNav__list__mobile" class="mainNav__list textShadow noPc">
+        <li class="mainNav__item">
+          <a href="/">Inicio</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="/sobreNosotros">Sobre Nosotros</a>
+        </li>
+        <li class="mainNav__item"><a href="#Blog">Blog</a></li>
+        <div class="socialMedia">
+          <div class="socialMedia__icon">
+            <img src="./assets/Facebook.svg" alt="icono de Facebook" />
+          </div>
+          <div class="socialMedia__icon">
+            <img src="./assets/WhatsApp.svg" alt="icono de WhatsApp" />
+          </div>
+          <div class="socialMedia__icon">
+            <img src="./assets/Instagram.svg" alt="icono de Instagram" />
+          </div>
+          <div class="socialMedia__icon">
+            <img src="./assets/Linkedin.svg" alt="icono de Linkedin" />
+          </div>
+        </div>
+      </ul>
+      <!-- <div class="mainNav__mobile__slider">
+      </div> -->
     </nav>
     <header class="header">
       <div class="header__content">
@@ -44,6 +89,13 @@
         </div>
 
         <h1 class="header__title">Noticias del Clima en Tiempo Real</h1>
+        <p class="header_subtitle">
+          Descubre las condiciones climáticas de tu ciudad y mantente preparado
+          con datos precisos y actualizados.
+        </p>
+        <a class="btn" href="#" target="_blank" rel="noopener noreferrer"
+          ><button type="button">Ver API</button></a
+        >
       </div>
     </header>
   </body>

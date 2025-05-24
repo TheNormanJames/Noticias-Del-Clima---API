@@ -37,7 +37,7 @@ body {
  line-height: 1.4;
  -webkit-font-smoothing: antialiased;
  overflow-x: hidden;
- font-family: var(--fontfamily);
+ font-family: var(--ff1);
  background: linear-gradient(to bottom, #fffaeacd, #fffaea);
 }
 
@@ -89,11 +89,14 @@ h5,
 h6 {
  overflow-wrap: break-word;
  text-wrap: balance;
- font-family: var(--fontfamily);
+ font-family: var(--ff1);
+ line-height: 1.2;
 }
 
 p {
  text-wrap: pretty;
+ font-family: var(--ff2);
+ line-height: 1.4;
 }
 
 /*
@@ -123,43 +126,276 @@ li {
  list-style: none;
 }
 
+:root {
+ --color-white: #fff;
+ --color-black: #000;
 
-/*------------------------------------------------*/
-/* #region //* header */
+ --color-clima-primary: #58C8F4;
+ --color-clima-bg: #4C6873;
+ --color-clima-light: #A0DBF2;
+ --color-clima-accent: #295E73;
+ --color-clima-extra: #7EADBF;
+ /* Azul */
+ --color-azul-900: #053345;
+ --color-azul-800: #09668A;
+ --color-azul-700: #0E99D0;
+ --color-azul-600: #35BDF2;
+ --color-azul-500: #58C8F4;
+ --color-azul-400: #6BCEF5;
+ --color-azul-300: #7DD4F6;
+ --color-azul-200: #A2E0F9;
+ --color-azul-100: #C7EDFB;
+ --color-azul-50: #DAF3FD;
 
-.header {}
+ /* Neutro */
+ --color-neutro-bgDark: #152129;
+ --color-neutro-title2: #1C2B36;
+ --color-neutro-title: #273B49;
+ --color-neutro-text: #687782;
+ --color-neutro-light: #8E9BA4;
+ --color-neutro-lighter: #B7C0C7;
+ --color-neutro-border: #ECF0F3;
+ --color-neutro-bgAlt: #F9FAFB;
+ --color-neutro-bg: #FBFDFE;
 
-.header__content {}
+ /* Diseno */
+ --borde-radius: 8px;
+ --borde-radius-s: 4px;
 
+ /* Fonts */
+ --ff1: "ADLaM Display", system-ui;
+ --ff2: "Afacad", sans-serif;
+ --fzbig: 61px;
+ --fzxxl: 49px;
+ --fzxl: 39px;
+ --fzx: 31px;
+ --fzl: 25px;
+ --fzm: 21px;
+ --fznormal: 16px;
+}
+
+.textShadow {
+ text-shadow: 4px 4px 8px #05334565;
+}
+
+.noPc {
+ @media screen and (min-width: 768px) {
+  display: none !important;
+ }
+}
+
+.noMobile {
+ @media screen and (max-width: 768px) {
+  display: none !important;
+ }
+}
 
 .socialMedia {
  display: flex;
+ justify-content: center;
+ gap: 16px;
+ animation: fadeLeft .5s ease-in-out forwards;
+
+ .socialMedia__icon {
+  background-color: var(--color-azul-900);
+  padding: 11px;
+  border-radius: var(--borde-radius);
+ }
+
+ img {
+  width: 17px;
+  aspect-ratio: 1/1;
+ }
 }
 
+.btn {
+ display: flex;
+ gap: 6px;
+ width: max-content;
 
-/* #endregion //! header */
+ justify-content: center;
+ align-items: center;
+
+ border-radius: var(--borde-radius-s);
+
+ background-color: var(--color-azul-800);
+ color: var(--color-white);
+ font-family: var(--ff2);
+ padding-block: 8px;
+ padding-inline: 16px;
+ font-size: var(--fznormal);
+ font-weight: 500;
+
+ opacity: 0;
+ animation: fadeLeft .5s .75s ease-in-out forwards;
+
+ transition: background-color .3s ease-in-out;
+
+ &::before {
+  content: url('./assets/icons/Sun.svg');
+  vertical-align: middle;
+  margin-top: .2em;
+  /* margin-left: 6px; */
+ }
+
+ &::after {
+  content: '>';
+  /* margin-left: 6px; */
+ }
+
+ &:hover {
+  background-color: var(--color-azul-900);
+ }
+}
 
 /* /------------------------------------------------ */
 /* #region //* mainNav */
 
+
 .mainNav {
- /* height: inherit; */
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ z-index: 2;
+
+ height: clamp(80px, 5vw + .5rem, 100px);
+ /* background: color-mix(in srgb, var(--color-azul-300) 30%, transparent); */
+ backdrop-filter: blur(9px);
+ -webkit-backdrop-filter: blur(9px);
+ font-family: var(--ff2);
+ font-size: clamp(20px, 2vw + .5rem, 20px);
+ font-weight: 600;
+ color: var(--color-azul-900);
+ text-transform: uppercase;
+
+}
+
+.mainNav__mobile {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ height: 100%;
+ padding-inline: 25px;
+ background-color: var(--color-azul-900);
+}
+
+.mainNav__hamburger {
+ width: 25px;
 }
 
 .mainNav__list {
  display: flex;
+ gap: 90px;
  justify-content: center;
  align-items: center;
- height: 68px;
+
+ @media screen and (max-width: 768px) {
+  display: none;
+  padding: 100px 48px;
+  justify-content: start;
+  /* justify-content: center; */
+  align-items: start;
+  position: absolute;
+  z-index: 100;
+  top: 80px;
+  right: 0;
+  width: 80%;
+  background: var(--color-clima-bg);
+  flex-direction: column;
+  height: calc(100dvh - 80px);
+  color: white;
+  gap: 24px;
+  /* translate: 100%; */
+  /* transition: translate .3s ease-in-out; */
+ }
+
+ .socialMedia {
+  /* align-self: flex-end; */
+  justify-self: flex-end;
+ }
+
+ &.show_mainNav__list {
+  display: flex;
+  /* translate: 0px; */
+ }
 }
 
 .mainNav__item {
- height: inherit;
+ display: flex;
+ align-items: center;
+
+ a {
+  /* height: inherit; */
+ }
 }
 
 .mainNav__logo {
- height: 100%;
+ height: 100px;
+ /* display: none; */
 }
 
 
+
+
 /* #endregion //! mainNav */
+
+/*------------------------------------------------*/
+/* #region //* header */
+
+
+
+.header {
+ position: relative;
+ z-index: 1;
+ min-height: 100dvh;
+ background: linear-gradient(147deg, color-mix(in srgb, var(--color-azul-100) 50%, transparent), color-mix(in srgb, var(--color-azul-800) 100%, transparent)), url('./assets/sky-montain.png') center / cover;
+
+
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.header__content {
+ width: min(90%, 791px);
+ text-align: center;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 24px;
+}
+
+.header__title {
+ font-size: clamp(var(--fzxxl), 3vw + .5rem, var(--fzbig));
+ color: var(--color-azul-900);
+ font-weight: normal;
+ /* margin-block: .4em; */
+ opacity: 0;
+
+ animation: fadeLeft .5s .25s ease-in-out forwards;
+}
+
+.header_subtitle {
+ font-size: clamp(var(--fzm), 2vw + .5rem, var(--fzl));
+ color: var(--color-white);
+ font-family: var(--ff1);
+ opacity: 0;
+ animation: fadeLeft .5s .5s ease-in-out forwards;
+}
+
+@keyframes fadeLeft {
+ from {
+  opacity: 0;
+  translate: -100px;
+ }
+
+ to {
+  opacity: 1;
+  translate: 0px;
+ }
+}
+
+
+
+/* #endregion //! header */
