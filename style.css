@@ -1,0 +1,165 @@
+*,
+*::before,
+*::after {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+}
+
+img {
+ width: 100%;
+}
+
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+ height: 100%;
+ hanging-punctuation: first last;
+}
+
+input {
+ width: 100%;
+}
+
+input[type='color'] {
+ width: 3em;
+ height: 2em;
+}
+
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+ line-height: 1.4;
+ -webkit-font-smoothing: antialiased;
+ overflow-x: hidden;
+ font-family: var(--fontfamily);
+ background: linear-gradient(to bottom, #fffaeacd, #fffaea);
+}
+
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+ display: block;
+ max-width: 100%;
+ height: auto;
+ vertical-align: middle;
+ font-style: italic;
+}
+
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+ font: inherit;
+}
+
+textarea {
+ resize: vertical;
+ form-sizing: content;
+ max-height: 5em;
+}
+
+button {
+ all: unset;
+ cursor: pointer;
+}
+
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+ overflow-wrap: break-word;
+ text-wrap: balance;
+ font-family: var(--fontfamily);
+}
+
+p {
+ text-wrap: pretty;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+ isolation: isolate;
+}
+
+@media (prefers-reduced-motion:no-preference) {
+
+ :has(:target),
+ :root {
+
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+ }
+}
+
+a {
+ text-decoration: none;
+ color: inherit;
+}
+
+li {
+ list-style: none;
+}
+
+
+/*------------------------------------------------*/
+/* #region //* header */
+
+.header {}
+
+.header__content {}
+
+
+.socialMedia {
+ display: flex;
+}
+
+
+/* #endregion //! header */
+
+/* /------------------------------------------------ */
+/* #region //* mainNav */
+
+.mainNav {
+ /* height: inherit; */
+}
+
+.mainNav__list {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 68px;
+}
+
+.mainNav__item {
+ height: inherit;
+}
+
+.mainNav__logo {
+ height: 100%;
+}
+
+
+/* #endregion //! mainNav */
