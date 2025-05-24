@@ -10,9 +10,7 @@ img {
  width: 100%;
 }
 
-/*
-  3. Allow percentage-based heights in the application
-*/
+/*  3. Allow percentage-based heights in the application*/
 html,
 body {
  height: 100%;
@@ -28,11 +26,7 @@ input[type='color'] {
  height: 2em;
 }
 
-/*
-  Typographic tweaks!
-  4. Add accessible line-height
-  5. Improve text rendering
-*/
+/*  Typographic tweaks!  4. Add accessible line-height  5. Improve text rendering*/
 body {
  line-height: 1.4;
  -webkit-font-smoothing: antialiased;
@@ -41,9 +35,7 @@ body {
  background: linear-gradient(to bottom, #fffaeacd, #fffaea);
 }
 
-/*
-  6. Improve media defaults
-*/
+/*  6. Improve media defaults*/
 img,
 picture,
 video,
@@ -56,9 +48,7 @@ svg {
  font-style: italic;
 }
 
-/*
-  7. Remove built-in form typography styles
-*/
+/*  7. Remove built-in form typography styles*/
 input,
 button,
 textarea,
@@ -77,9 +67,7 @@ button {
  cursor: pointer;
 }
 
-/*
-  8. Avoid text overflows
-*/
+/*  8. Avoid text overflows*/
 p,
 h1,
 h2,
@@ -90,18 +78,17 @@ h6 {
  overflow-wrap: break-word;
  text-wrap: balance;
  font-family: var(--ff1);
+ font-weight: normal;
  line-height: 1.2;
 }
 
 p {
  text-wrap: pretty;
- font-family: var(--ff2);
+ font-family: var(--ff2) !important;
  line-height: 1.4;
 }
 
-/*
-  9. Create a root stacking context
-*/
+/*  9. Create a root stacking context*/
 #root,
 #__next {
  isolation: isolate;
@@ -111,7 +98,6 @@ p {
 
  :has(:target),
  :root {
-
   scroll-behavior: smooth;
   scroll-padding-top: 3rem;
  }
@@ -129,7 +115,6 @@ li {
 :root {
  --color-white: #fff;
  --color-black: #000;
-
  --color-clima-primary: #58C8F4;
  --color-clima-bg: #4C6873;
  --color-clima-light: #A0DBF2;
@@ -146,7 +131,6 @@ li {
  --color-azul-200: #A2E0F9;
  --color-azul-100: #C7EDFB;
  --color-azul-50: #DAF3FD;
-
  /* Neutro */
  --color-neutro-bgDark: #152129;
  --color-neutro-title2: #1C2B36;
@@ -157,11 +141,9 @@ li {
  --color-neutro-border: #ECF0F3;
  --color-neutro-bgAlt: #F9FAFB;
  --color-neutro-bg: #FBFDFE;
-
  /* Diseno */
  --borde-radius: 8px;
  --borde-radius-s: 4px;
-
  /* Fonts */
  --ff1: "ADLaM Display", system-ui;
  --ff2: "Afacad", sans-serif;
@@ -172,6 +154,28 @@ li {
  --fzl: 25px;
  --fzm: 21px;
  --fznormal: 16px;
+ /* slider */
+ --image_thumb-sun: url('./assets/images/sun.jpg');
+ --image_thumb-rain: url('./assets/images/rain.jpg');
+ --image_thumb-little_rain: url('./assets/images/little_rain.jpg');
+ --image_thumb-storm: url('./assets/images/storm.jpg');
+ --image_thumb: var(--image_thumb-sun);
+}
+
+.sun {
+ --image_thumb: var(--image_thumb-sun);
+}
+
+.rain {
+ --image_thumb: var(--image_thumb-rain);
+}
+
+.little_rain {
+ --image_thumb: var(--image_thumb-little_rain);
+}
+
+.storm {
+ --image_thumb: var(--image_thumb-storm);
 }
 
 .textShadow {
@@ -188,6 +192,11 @@ li {
  @media screen and (max-width: 768px) {
   display: none !important;
  }
+}
+
+.contenedor-pcL {
+ width: min(90%, 1500px);
+ margin-inline: auto;
 }
 
 .socialMedia {
@@ -210,36 +219,33 @@ li {
 
 .btn {
  display: flex;
- gap: 6px;
+ gap: 12px;
  width: max-content;
-
  justify-content: center;
  align-items: center;
-
  border-radius: var(--borde-radius-s);
-
  background-color: var(--color-azul-800);
  color: var(--color-white);
  font-family: var(--ff2);
  padding-block: 8px;
- padding-inline: 16px;
+ padding-inline: 24px;
  font-size: var(--fznormal);
  font-weight: 500;
-
  opacity: 0;
  animation: fadeLeft .5s .75s ease-in-out forwards;
-
  transition: background-color .3s ease-in-out;
 
  &::before {
   content: url('./assets/icons/Sun.svg');
   vertical-align: middle;
-  margin-top: .2em;
+  margin-top: .3em;
   /* margin-left: 6px; */
  }
 
  &::after {
-  content: '>';
+  content: url('./assets/icons/Arrow.svg');
+  vertical-align: middle;
+  margin-top: .3em;
   /* margin-left: 6px; */
  }
 
@@ -250,15 +256,12 @@ li {
 
 /* /------------------------------------------------ */
 /* #region //* mainNav */
-
-
 .mainNav {
  position: fixed;
  top: 0;
  left: 0;
  right: 0;
  z-index: 2;
-
  height: clamp(80px, 5vw + .5rem, 100px);
  /* background: color-mix(in srgb, var(--color-azul-300) 30%, transparent); */
  backdrop-filter: blur(9px);
@@ -268,7 +271,6 @@ li {
  font-weight: 600;
  color: var(--color-azul-900);
  text-transform: uppercase;
-
 }
 
 .mainNav__mobile {
@@ -335,23 +337,14 @@ li {
  /* display: none; */
 }
 
-
-
-
 /* #endregion //! mainNav */
-
 /*------------------------------------------------*/
 /* #region //* header */
-
-
-
 .header {
  position: relative;
  z-index: 1;
  min-height: 100dvh;
- background: linear-gradient(147deg, color-mix(in srgb, var(--color-azul-100) 50%, transparent), color-mix(in srgb, var(--color-azul-800) 100%, transparent)), url('./assets/sky-montain.png') center / cover;
-
-
+ background: linear-gradient(147deg, color-mix(in srgb, var(--color-azul-100) 50%, transparent), color-mix(in srgb, var(--color-azul-800) 100%, transparent)), url('./assets/images/sky-montain.png') center / cover;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -367,12 +360,11 @@ li {
 }
 
 .header__title {
- font-size: clamp(var(--fzxxl), 3vw + .5rem, var(--fzbig));
+ font-size: clamp(var(--fzxl), 3vw + .5rem, var(--fzbig));
  color: var(--color-azul-900);
  font-weight: normal;
  /* margin-block: .4em; */
  opacity: 0;
-
  animation: fadeLeft .5s .25s ease-in-out forwards;
 }
 
@@ -396,6 +388,147 @@ li {
  }
 }
 
-
-
 /* #endregion //! header */
+/*------------------------------------------------*/
+/* #region //* sectionAPI */
+.section {
+ height: 100dvh;
+}
+
+.sectionAPI {
+ background: linear-gradient(147deg, color-mix(in srgb, var(--color-neutro-bgDark) 90%, transparent), color-mix(in srgb, var(--color-neutro-bgDark) 90%, transparent)), url(./assets/images/sun.jpg) center / cover;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+
+ .sectionAPI__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+   flex-direction: row;
+  }
+ }
+
+ .sectionAPI__textContent {
+  position: relative;
+
+  &::after {
+   content: '';
+   width: 80px;
+   aspect-ratio: 1/1;
+   /* height: 40px; */
+   background: url('./assets/icons/compass.png') center /cover no-repeat;
+   right: 0;
+   top: 0;
+   position: absolute;
+   color: white;
+   rotate: attr(data-rotate deg);
+   transition: rotate .3s ease-in-out;
+  }
+ }
+
+ .sectionAPI__title {
+  font-size: clamp(var(--fzbig), 2vw + .5rem, var(--fzbig));
+  color: var(--color-neutro-bg);
+ }
+
+ .sectionAPI__subTitle {
+  font-family: var(--ff2);
+  font-size: clamp(var(--fzxl), 2vw + .5rem, var(--fzxl));
+  color: var(--color-neutro-bg);
+ }
+
+ .sectionAPI__description {
+  font-family: var(--ff2);
+  font-size: clamp(var(--fzm), 2vw + .5rem, var(--fzm));
+  color: var(--color-neutro-lighter);
+  font-weight: bold;
+ }
+
+ .sectionAPI__list {
+  font-family: var(--ff2);
+  font-size: clamp(var(--fzm), 2vw + .5rem, var(--fzm));
+  color: var(--color-neutro-lighter);
+ }
+}
+
+/* #endregion //! sectionAPI */
+/*------------------------------------------------*/
+/* #region //* slider */
+.sliderButtons {
+ display: flex;
+ margin-top: 1em;
+ gap: 2em;
+
+ .slider__arrowLeft,
+ .slider__arrowRight {
+  rotate: 180deg;
+  height: 40px;
+  width: 40px;
+  aspect-ratio: 1/1;
+ }
+
+ .slider__arrowRight {
+  rotate: 0deg;
+ }
+}
+
+.sectionAPI__sliderArea {
+ position: relative;
+ /* width: 57%; */
+ max-width: 90vw;
+ /* translate: 8vw; */
+ overflow: hidden;
+ overflow-x: scroll;
+ scrollbar-width: none;
+ scroll-snap-type: x mandatory;
+ scroll-behavior: smooth;
+ -webkit-overflow-scrolling: touch;
+
+ @media screen and (min-width: 768px) {
+  width: 57%;
+  max-width: 80vw;
+  translate: 8vw;
+
+ }
+
+
+
+
+ .sectionAPI__slider {
+  /* overflow-x: auto; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  translate: 0;
+
+ }
+
+ .sectionAPI__sliderItem {
+  scroll-snap-align: start;
+  width: 388px;
+  flex-shrink: 0;
+  flex: 0 0 70%;
+  aspect-ratio: 1/1;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), var(--image_thumb) center / cover no-repeat;
+  border-radius: var(--borde-radius);
+
+  @media screen and (min-width: 768px) {
+   flex: 0 0 40%;
+
+  }
+ }
+
+}
+
+/* #endregion //! slider */
+
+.hidden {
+ /* display: none; */
+ visibility: hidden;
+ user-select: none;
+}
