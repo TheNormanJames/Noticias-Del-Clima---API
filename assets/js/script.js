@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       rotateCompass('left');
 
       slider.scrollBy({
-        left: -sliderItemsTranslate, // Desplazamos hacia atrás el ancho del contenedor
+        left: -sliderItemsTranslate,
         behavior: 'smooth',
       });
     }
@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       isSlider__arrowLeftVisible(true);
       rotateCompass();
       slider.scrollBy({
-        left: sliderItemsTranslate, // Desplazamos el ancho completo del contenedor
-        behavior: 'smooth', // Hacemos el scroll suave
+        left: sliderItemsTranslate,
+        behavior: 'smooth',
       });
       addLastItem();
     }
@@ -82,8 +82,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   // useWeather();
 
   const { principal, otherCities } = await useAPI();
-  console.log(principal, otherCities);
+  // console.log(principal, otherCities);
   await addWeatherToHTML(principal);
+
+  console.log(otherCities);
 
   await slidesDinamycs(otherCities);
 });
@@ -92,7 +94,7 @@ function slidesDinamycs(otherCities) {
   const fragment = document.createDocumentFragment();
 
   otherCities.forEach((city) => {
-    console.log(city);
+    // console.log(city);
 
     const div = document.createElement('div');
     div.classList.add(
@@ -110,29 +112,31 @@ function slidesDinamycs(otherCities) {
   sectionAPI__slider.appendChild(fragment);
 }
 async function useAPI(params) {
+  // setTimeout(() => {
+  const search = nnjWeatherSettings.search;
+
   const apiId = '2d617267bba25115698aaaff0fba2c41';
-  const search = {
-    city: 'bogota',
-    country: 'Colombia',
-  };
+  // const search = {
+  //   city: 'bogota',
+  //   country: 'Colombia',
+  // };
 
-  const othersCitys = [
-    { city: 'madrid', country: 'España' },
-    { city: 'london', country: 'United Kingdom' },
-    { city: 'oslo', country: 'norway' },
-    { city: 'new york', country: 'United States' },
-  ];
+  // const othersCitys = [
+  //   { city: 'madrid', country: 'España' },
+  //   { city: 'london', country: 'United Kingdom' },
+  //   { city: 'oslo', country: 'norway' },
+  //   { city: 'new york', country: 'United States' },
+  // ];
+  const othersCitys = nnjWeatherSettings.othersCitys;
 
-  // 1. Función para obtener datos geográficos
   const fetchGeoData = async (city, country) => {
     const geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiId}`;
-    console.log(geoURL);
+    // console.log(geoURL);
     const res = await fetch(geoURL);
     if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
     return await res.json();
   };
 
-  // 2. Función para obtener datos climáticos
   const fetchWeatherData = async (lat, lon) => {
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiId}`;
     const res = await fetch(weatherUrl);
@@ -143,16 +147,18 @@ async function useAPI(params) {
   try {
     // Ciudad principal
     const geoData = await fetchGeoData(search.city, search.country);
-    console.log(geoData);
+    // console.log(geoData);
     const { lat, lon } = geoData[0];
     const weatherData = await fetchWeatherData(lat, lon);
 
-    // Ciudades secundarias (en paralelo)
+    // Ciudades secundarias
     const otherCitiesData = await Promise.all(
       othersCitys.map(async (place) => {
         const geoData = await fetchGeoData(place.city, place.country);
+
         const { lat, lon } = geoData[0];
         const weatherData = await fetchWeatherData(lat, lon);
+        console.log(weatherData);
         return {
           city: place.city,
           country: place.country,
@@ -162,8 +168,8 @@ async function useAPI(params) {
       })
     );
 
-    console.log(weatherData);
-    console.log(otherCitiesData, 'otherCitiesData');
+    // console.log(weatherData);
+    // console.log(otherCitiesData, 'otherCitiesData');
 
     // Formatear respuesta
 

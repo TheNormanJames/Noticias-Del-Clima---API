@@ -1,4 +1,6 @@
 <?php
+require get_template_directory() . '/includes/customizer/customizerAPI.php';
+
 function nnj_theme_customizer($wp_customize)
 {
  // Sección para el Header
@@ -257,6 +259,9 @@ function nnj_theme_customizer_footer($wp_customize)
 
 }
 add_action('customize_register', 'nnj_theme_customizer_footer');
+
+
+
 
 
 //#endregion //! Footer
