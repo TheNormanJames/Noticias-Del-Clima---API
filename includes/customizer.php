@@ -195,6 +195,24 @@ function nnj_theme_customizer_footer($wp_customize)
 
  //#endregion //! url Button
 
+ //*------------------------------------------------*/
+ //#region //* BannerFooter
+
+ // Campo para el enlace los rights
+ $wp_customize->add_setting('nnj_footer_rights', array(
+  'default' => '#',
+  'transport' => 'refresh',
+ ));
+
+ $wp_customize->add_control('nnj_footer_rights_control', array(
+  'label' => 'URL de los Derechos Reservados',
+  'section' => 'nnj_footer_section',
+  'settings' => 'nnj_footer_rights',
+  'type' => 'url',
+ ));
+
+ //#endregion //! BannerFooter
+
 }
 add_action('customize_register', 'nnj_theme_customizer_footer');
 

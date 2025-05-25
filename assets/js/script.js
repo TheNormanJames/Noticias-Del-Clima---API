@@ -188,7 +188,6 @@ async function useAPI(params) {
           main: weatherData.weather[0].main,
           // main_format: formatImgWeather(weather[0].main),
         },
-        // weather: weatherData.weather[0],
         humidity: weatherData.main.humidity,
         wind: weatherData.wind,
       },
@@ -196,7 +195,7 @@ async function useAPI(params) {
     };
   } catch (error) {
     console.error('Error en useAPI:', error);
-    throw error; // Puedes manejar esto en el componente que llama a la función
+    throw error;
   }
 }
 

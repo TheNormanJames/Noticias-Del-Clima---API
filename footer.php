@@ -16,16 +16,24 @@
  <div class="footer__bottomBanner">
   <div class="container-pcL">
    <nav class="footer__menu">
-    <ul class="footer__menuList">
-     <li class="footer__menuItem"><a href="#Inicio">Inicio</a></li>
+
+    <?php wp_nav_menu(array(
+     'container' => false,
+     'menu_class' => 'footer__menuList',
+     'theme_location' => 'menu-footer',
+    )); ?>
+    <!-- <ul class="footer__menuList">
+     <li class="footer__menuItem">
+      <a href="#Inicio">Inicio</a>
+     </li>
      <li class="footer__menuItem">
       <a href="#Sobre Nosotros">Sobre Nosotros</a>
      </li>
      <li class="footer__menuItem"><a href="#Blog">Blog</a></li>
-    </ul>
+    </ul> -->
    </nav>
    <p class="footer__rights">
-    2025© - <a href="#derechos" class="rights">derechos reservados </a>
+    2025© - <a href="<?php echo esc_url(get_theme_mod('nnj_footer_rights', '#')); ?>" class="rights">derechos reservados </a>
    </p>
   </div>
  </div>

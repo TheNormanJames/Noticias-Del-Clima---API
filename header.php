@@ -20,7 +20,7 @@
 <body>
 
  <nav class="mainNav">
-  <ul class="mainNav__list textShadow noMobile">
+  <!-- <ul class="mainNav__list textShadow noMobile">
 
    <li class="mainNav__item">
     <a href="#SobreNosotros">Sobre Nosotros</a>
@@ -32,7 +32,14 @@
       alt="Logo principal del proyecto" /></a>
    </li>
    <li class="mainNav__item"><a href="#Blog">Blog</a></li>
-  </ul>
+  </ul> -->
+  <?php
+  wp_nav_menu(array(
+   'container' => false,
+   'menu_class' => 'mainNav__list textShadow noMobile',
+   'theme_location' => 'menu-principal',
+   'walker' => new NNJ_Logo_In_Menu_Walker(),
+  )); ?>
   <div class="mainNav__mobile noPc">
    <a href="#SobreNosotros"><img
      class="mainNav__logo"
@@ -45,13 +52,21 @@
     id="mainNav__hamburger" />
   </div>
   <ul id="mainNav__list__mobile" class="mainNav__list textShadow noPc">
-   <li class="mainNav__item">
+   <?php
+   wp_nav_menu(array(
+    'theme_location' => 'menu-responsive',
+    'container' => false,
+    'items_wrap' => '%3$s', //removiendo el ul
+    'walker' => new Mobile_Menu_Walker()
+   ));
+   ?>
+   <!-- <li class="mainNav__item">
     <a href="/">Inicio</a>
    </li>
    <li class="mainNav__item">
     <a href="/sobreNosotros">Sobre Nosotros</a>
    </li>
-   <li class="mainNav__item"><a href="#Blog">Blog</a></li>
+   <li class="mainNav__item"><a href="#Blog">Blog</a></li> -->
    <div class="socialMedia">
     <div class="socialMedia__icon">
      <img src="<?php echo get_template_directory_uri(); ?>/assets/Facebook.svg" alt="icono de Facebook" />
