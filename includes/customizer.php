@@ -129,6 +129,48 @@ add_action('wp_head', 'nnj_heroImg_custom_background_css');
 
 
 //*------------------------------------------------*/
+//#region //* api
+function nnj_theme_customizer_api($wp_customize)
+{
+ // Sección para el api
+ $wp_customize->add_section('nnj_api_section', array(
+  'title' => 'API Section',
+  'priority' => 30,
+ ));
+
+ // Campo para la Ciudad
+ $wp_customize->add_setting('nnj_api_subtitle', array(
+  'default' => 'Agrega la ciudad que quieres ver',
+  'transport' => 'refresh',
+ ));
+
+ $wp_customize->add_control('nnj_api_subtitle_control', array(
+  'label' => 'Ciudad a buscar',
+  'section' => 'nnj_api_section',
+  'settings' => 'nnj_api_subtitle',
+  'type' => 'textarea',
+ ));
+ // Campo para la País
+ $wp_customize->add_setting('nnj_country_subtitle', array(
+  'default' => 'Agrega el país que quieres ver',
+  'transport' => 'refresh',
+ ));
+
+ $wp_customize->add_control('nnj_country_subtitle_control', array(
+  'label' => 'País a buscar',
+  'section' => 'nnj_api_section',
+  'settings' => 'nnj_country_subtitle',
+  'type' => 'textarea',
+ ));
+
+ //#endregion //! Bannerapi
+
+}
+add_action('customize_register', 'nnj_theme_customizer_api');
+
+
+//#endregion //! api
+//*------------------------------------------------*/
 //#region //* Footer
 function nnj_theme_customizer_footer($wp_customize)
 {
