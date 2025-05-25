@@ -1,3 +1,14 @@
+<section class="section newsletter">
+ <div class="container-pcL">
+  <h3 class="newsletter__title">News letter</h3>
+  <input
+   type="email"
+   id="newsletterInput"
+   class="newsletterInput"
+   placeholder="Ingresa tu correo Electrónico" />
+ </div>
+</section>
+</main>
 <footer class="footer">
  <div class="container-pcL">
   <div class="footer__textContent">

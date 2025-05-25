@@ -83,7 +83,7 @@ h6 {
 }
 
 p {
- text-wrap: pretty;
+ /* text-wrap: pretty; */
  font-family: var(--ff2);
  line-height: 1.4;
 }
@@ -253,7 +253,7 @@ li {
  }
 
  &::after {
-  content: url('../icons/Arrow.svg');
+  content: url('../icons/ArrowWhite.svg');
   vertical-align: middle;
   margin-top: .3em;
   /* margin-left: 6px; */
@@ -414,6 +414,10 @@ li {
   width: 40px;
   aspect-ratio: 1/1;
   cursor: pointer;
+
+  /* background-color: color-mix(in srgb, var(--color-white) 50%, transparent);
+border-radius: 100%;
+fill: #fff; */
 
   &:hover {
    scale: 1.2;

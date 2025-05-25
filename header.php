@@ -10,8 +10,6 @@
  <link
   href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Afacad:ital,wght@0,400..700;1,400..700&display=swap"
   rel="stylesheet" />
- <!-- <link rel="stylesheet" href="style.css" /> -->
- <!-- <link rel="stylesheet" href="style.css" /> -->
  <!-- <title>Noticias Del Clima - API</title> -->
  <meta name="description" content="<?php bloginfo('description'); ?>">
  <?php wp_head(); ?>
