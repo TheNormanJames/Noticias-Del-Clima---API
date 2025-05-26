@@ -25,8 +25,8 @@ function nnj_enqueue_scripts()
    'country' => get_theme_mod('nnj_weather_country_four', 'Norway'),
   ),
   array(
-   'city' => get_theme_mod('nnj_weather_city_five', 'new york'),
-   'country' => get_theme_mod('nnj_weather_country_five', 'United States'),
+   'city' => get_theme_mod('nnj_weather_city_five', 'pekin'),
+   'country' => get_theme_mod('nnj_weather_country_five', 'china'),
   ),
  );
 

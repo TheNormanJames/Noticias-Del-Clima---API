@@ -93,7 +93,7 @@ function nnj_weather_customizer($wp_customize)
   'settings' => 'nnj_weather_country_four',
  ));
  $wp_customize->add_setting('nnj_weather_city_five', array(
-  'default' => 'new york',
+  'default' => 'pekin',
   'transport' => 'refresh',
  ));
 
@@ -104,7 +104,7 @@ function nnj_weather_customizer($wp_customize)
  ));
 
  $wp_customize->add_setting('nnj_weather_country_five', array(
-  'default' => 'United States',
+  'default' => 'China',
   'transport' => 'refresh',
  ));
 
