@@ -38,6 +38,7 @@
       Feels like 14°C. Overcast clouds. Gentle Breeze
      </p>
      <ul class="sectionAPI__list">
+      <li class="sectionAPI__listItem hour">Hora: <span></span> </li>
       <li class="sectionAPI__listItem humidity">Humedad: <span></span> </li>
       <li class="sectionAPI__listItem temp_max temperature">Temperatura max: <span></span></li>
       <li class="sectionAPI__listItem temp_min temperature">emperatura min: <span></span></li>

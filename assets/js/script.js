@@ -82,10 +82,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   // useWeather();
 
   const { principal, otherCities } = await useAPI();
-  // console.log(principal, otherCities);
   await addWeatherToHTML(principal);
-
-  console.log(otherCities);
 
   await slidesDinamycs(otherCities);
 });
@@ -94,8 +91,6 @@ function slidesDinamycs(otherCities) {
   const fragment = document.createDocumentFragment();
 
   otherCities.forEach((city) => {
-    // console.log(city);
-
     const div = document.createElement('div');
     div.classList.add(
       'sectionAPI__sliderItem',
@@ -107,31 +102,17 @@ function slidesDinamycs(otherCities) {
      <p class="temperature">${formatTemperature(city.temp)}</p>`;
     fragment.appendChild(div);
   });
-  // console.log(fragment);
 
   sectionAPI__slider.appendChild(fragment);
 }
 async function useAPI(params) {
-  // setTimeout(() => {
   const search = nnjWeatherSettings.search;
 
   const apiId = '2d617267bba25115698aaaff0fba2c41';
-  // const search = {
-  //   city: 'bogota',
-  //   country: 'Colombia',
-  // };
-
-  // const othersCitys = [
-  //   { city: 'madrid', country: 'España' },
-  //   { city: 'london', country: 'United Kingdom' },
-  //   { city: 'oslo', country: 'norway' },
-  //   { city: 'new york', country: 'United States' },
-  // ];
   const othersCitys = nnjWeatherSettings.othersCitys;
 
   const fetchGeoData = async (city, country) => {
     const geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiId}`;
-    // console.log(geoURL);
     const res = await fetch(geoURL);
     if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
     return await res.json();
@@ -139,17 +120,44 @@ async function useAPI(params) {
 
   const fetchWeatherData = async (lat, lon) => {
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiId}`;
+    // http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${units}&lang=${lang}
+    const dataForeCast = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiId}`;
+    const resforeCast = await fetch(dataForeCast);
+    console.log(
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiId}`,
+      'Nuevo'
+    );
+    setTimeout(() => {
+      console.log(resforeCast.json(), 'resforeCast');
+    }, 2000);
+
     const res = await fetch(weatherUrl);
     if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
+    // console.log(weatherUrl);
+
     return await res.json();
+  };
+  const fetchDataForeCast = async (lat, lon) => {
+    const dataForeCast = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiId}`;
+
+    const res = await fetch(dataForeCast);
+    if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
+
+    const json = await res.json();
+    console.log(json, 'dataForeCast');
+
+    return json;
   };
 
   try {
     // Ciudad principal
     const geoData = await fetchGeoData(search.city, search.country);
-    // console.log(geoData);
     const { lat, lon } = geoData[0];
     const weatherData = await fetchWeatherData(lat, lon);
+    const dataForeCast = await fetchDataForeCast(lat, lon);
+    const pronostico5Dias = obtenerPronosticoDiario(dataForeCast);
+
+    console.log(pronostico5Dias);
 
     // Ciudades secundarias
     const otherCitiesData = await Promise.all(
@@ -158,7 +166,6 @@ async function useAPI(params) {
 
         const { lat, lon } = geoData[0];
         const weatherData = await fetchWeatherData(lat, lon);
-        console.log(weatherData);
         return {
           city: place.city,
           country: place.country,
@@ -168,12 +175,13 @@ async function useAPI(params) {
       })
     );
 
-    // console.log(weatherData);
-    // console.log(otherCitiesData, 'otherCitiesData');
-
     // Formatear respuesta
+    // Cachear los elementos
+    const now = Date.now(); //timestamp
+    // console.log(now);
 
-    return {
+    const finalData = {
+      // return {
       principal: {
         city: search.city,
         country: search.country,
@@ -196,9 +204,19 @@ async function useAPI(params) {
         },
         humidity: weatherData.main.humidity,
         wind: weatherData.wind,
+        pronostico5Dias: pronostico5Dias,
+        hour: now,
+        // hour: weatherData.dt,
       },
       otherCities: otherCitiesData,
     };
+
+    // localStorage.setItem(cacheKey, JSON.stringify({
+    //   data: finalData,
+    //   timestamp: now
+    // }));
+
+    return finalData;
   } catch (error) {
     console.error('Error en useAPI:', error);
     throw error;
@@ -216,6 +234,7 @@ const weatherDetails__temperature = document.querySelector(
   '.weatherDetails__temperature'
 );
 
+const hourHtml = document.querySelector('.hour span');
 const humidity = document.querySelector('.humidity span');
 const temp_max = document.querySelector('.temp_max span');
 const temp_min = document.querySelector('.temp_min span');
@@ -224,6 +243,9 @@ const windSpeed = document.querySelector('.windSpeed span');
 
 const sectionAPI = document.querySelector('.sectionAPI');
 const sectionAPI__slider = document.querySelector('.sectionAPI__slider');
+const weatherDetails__daysList = document.querySelector(
+  '.weatherDetails__daysList'
+);
 
 const sectionAPI__icon = document.querySelector('.sectionAPI__icon');
 function addWeatherToHTML(APIJSON) {
@@ -237,11 +259,32 @@ function addWeatherToHTML(APIJSON) {
   weatherDetails__temperature.innerHTML = APIJSON.temp;
   sectionAPI.classList.add(APIJSON.weather.description_format);
 
+  hourHtml.innerHTML = formatDate(APIJSON.hour);
   humidity.innerHTML = APIJSON.humidity;
   temp_max.innerHTML = APIJSON.temp_max;
   temp_min.innerHTML = APIJSON.temp_min;
   windDeg.innerHTML = `${APIJSON.wind.deg}deg`;
   windSpeed.innerHTML = APIJSON.wind.speed;
+
+  const fragment = document.createDocumentFragment();
+  APIJSON.pronostico5Dias.forEach((dia) => {
+    console.log(dia);
+
+    const li = document.createElement('li');
+    li.classList.add('weatherDetails__day');
+    li.innerHTML = `
+        <p class="weatherDetails__dayName">${obtenerNombreDelDia(dia.fecha)}</p>
+        <img src="http://openweathermap.org/img/wn/${
+          dia.icono
+        }@2x.png" alt="Icono del día" />
+        <p class="weatherDetails__dayTemperature temperature">${formatTemperature(
+          dia.temperatura
+        )}</p>
+       `;
+    fragment.appendChild(li);
+  });
+  weatherDetails__daysList.innerHTML = '';
+  weatherDetails__daysList.appendChild(fragment);
 }
 
 const formatTemperature = (temperature) => {
@@ -281,3 +324,69 @@ const formatImgWeather = (mainWeather) => {
   }
   return weather;
 };
+
+function formatDate(timestamp) {
+  const fecha = new Date(timestamp);
+  console.log(fecha);
+
+  const dias = [
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+  ];
+  const diaSemana = dias[fecha.getDay()];
+
+  console.log(fecha.getMonth());
+
+  const dia = fecha.getDate().toString();
+  const mes = (fecha.getMonth() + 1).toString();
+  const año = fecha.getFullYear();
+
+  const horas = fecha.getHours().toString();
+  const minutos = fecha.getMinutes().toString();
+
+  return `${horas}:${minutos} del día ${diaSemana} ${dia}/${mes}/${año} `;
+}
+function obtenerPronosticoDiario(data) {
+  const resultados = {};
+
+  data.list.forEach((item) => {
+    const fecha = new Date(item.dt * 1000);
+    const dia = fecha.toISOString().split('T')[0]; // yyyy-mm-dd
+    const hora = fecha.getHours();
+
+    if (
+      !resultados[dia] ||
+      Math.abs(hora - 12) < Math.abs(resultados[dia].hora - 12)
+    ) {
+      resultados[dia] = {
+        hora,
+        fecha,
+        temperatura: item.main.temp,
+        clima: item.weather[0].description,
+        icono: item.weather[0].icon,
+        viento: item.wind.speed,
+      };
+    }
+  });
+
+  // Se convierte el objeto en array y se saca solo los próximos 5 días
+  return Object.values(resultados).slice(0, 5);
+}
+function obtenerNombreDelDia(fechaString) {
+  const fecha = new Date(fechaString);
+  const dias = [
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+  ];
+  return dias[fecha.getDay()];
+}
