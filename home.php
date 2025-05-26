@@ -1,13 +1,6 @@
 <?php get_header(); ?>
 
-<header class="header aboutHeader">
- <div class="header__content">
-  <h1 class="header__title"> <?php echo get_the_title(get_option('page_for_posts')); ?></h1>
-  <p class="header_subtitle">
-   <?php echo get_theme_mod('nnj_header_subtitle', 'Texto por defecto si no hay valor.'); ?>
-  </p>
- </div>
-</header>
+
 
 <main class="blogMain">
  <section class="section">

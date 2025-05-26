@@ -39,7 +39,7 @@
    'walker' => new NNJ_Logo_In_Menu_Walker(),
   )); ?>
   <div class="mainNav__mobile noPc">
-   <a href="#SobreNosotros"><img
+   <a href="<?php echo home_url(); ?>"><img
      class="mainNav__logo"
      src="<?php echo get_template_directory_uri(); ?>/assets/logo.png"
      alt="Logo principal del proyecto" /></a>
@@ -83,3 +83,58 @@
   <!-- <div class="mainNav__mobile__slider">
       </div> -->
  </nav>
+
+ <?php
+ $is_homepage = is_front_page();
+ ?>
+
+ <?php if ($is_homepage): ?>
+  <header class="header">
+   <div class="header__content">
+    <?php if (get_theme_mod('nnj_show_social_icons', true)): ?>
+     <div class="socialMedia">
+      <div class="socialMedia__icon">
+       <img src="<?php echo get_template_directory_uri(); ?>/assets/Facebook.svg" alt="icono de Facebook" />
+      </div>
+      <div class="socialMedia__icon">
+       <img src="<?php echo get_template_directory_uri(); ?>/assets/WhatsApp.svg" alt="icono de WhatsApp" />
+      </div>
+      <div class="socialMedia__icon">
+       <img src="<?php echo get_template_directory_uri(); ?>/assets/Instagram.svg" alt="icono de Instagram" />
+      </div>
+      <div class="socialMedia__icon">
+       <img src="<?php echo get_template_directory_uri(); ?>/assets/Linkedin.svg" alt="icono de Linkedin" />
+      </div>
+     </div>
+    <?php endif; ?>
+    <h1 class="header__title"> <?php echo the_title(); ?></h1>
+    <p class="header_subtitle">
+     <!-- Descubre las condiciones climáticas de tu ciudad y mantente preparado -->
+     <!-- con datos precisos y actualizados. -->
+     <?php echo get_theme_mod('nnj_header_subtitle', 'Texto por defecto si no hay valor.'); ?>
+    </p>
+    <a class="btn" href="<?php echo esc_url(get_theme_mod('nnj_cta_url', '#')); ?>" target="_blank" rel="noopener noreferrer"><button type="button"><?php echo get_theme_mod('nnj_header_btntext', 'Ver API'); ?></button></a>
+   </div>
+  </header>
+
+
+ <?php else: ?>
+
+  <header class="header otherPages">
+   <div class="container-pcL">
+
+    <div class="header__content">
+     <h1 class="header__title"> <?php
+                                if (is_home()) {
+                                 echo get_the_title(get_option('page_for_posts'));
+                                } else {
+                                 the_title();
+                                }
+                                ?></h1>
+     <p class="header_subtitle">
+      <?php echo get_theme_mod('nnj_header_subtitle', 'Texto por defecto si no hay valor.'); ?>
+     </p>
+    </div>
+   </div>
+  </header>
+ <?php endif; ?>

@@ -1,20 +1,3 @@
-.aboutHeader {
- min-height: 60dvh !important;
- padding: 64px;
- align-items: flex-end !important;
- justify-content: start !important;
-
- .header__content {
-  max-width: 67ch;
-  align-items: start !important;
-  justify-content: start !important;
-  text-align: left;
-  gap: 8px;
- }
-
-}
-
-
 .blogMain {
  section {
   padding-block: 100px;
@@ -23,7 +6,7 @@
  }
 
  .blogMain__title {
-  font-size: clamp(var(--fzbig), 2vw + .5rem, var(--fzbig));
+  font-size: clamp(var(--fzxxl), 2vw + .5rem, var(--fzbig));
   color: var(--color-azul-900);
   margin-bottom: 64px;
  }
@@ -51,7 +34,7 @@
  .blog__post__title {
   font-family: var(--ff2);
   font-weight: 600;
-  font-size: clamp(var(--fzl), 2vw + .5rem, var(--fzl));
+  font-size: clamp(var(--fzxl), 2vw + .5rem, var(--fzl));
   color: var(--color-neutro-title2);
   text-transform: capitalize;
   margin-bottom: .2rem;
@@ -62,6 +45,8 @@
   font-size: clamp(var(--fzm), 2vw + .5rem, var(--fzm));
   color: var(--color-neutro-title2);
   line-height: 1.2;
+  text-wrap: pretty;
+
 
  }
 }

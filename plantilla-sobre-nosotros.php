@@ -9,16 +9,7 @@
 <?php get_header(); ?>
 
 
-<header class="header aboutHeader">
- <div class="header__content">
-  <h1 class="header__title"> <?php echo the_title(); ?></h1>
-  <p class="header_subtitle">
-   <!-- Descubre las condiciones climáticas de tu ciudad y mantente preparado -->
-   <!-- con datos precisos y actualizados. -->
-   <?php echo get_theme_mod('nnj_header_subtitle', 'Texto por defecto si no hay valor.'); ?>
-  </p>
- </div>
-</header>
+
 
 <main class="pagina-sobre-nosotros">
  <section class="section nuestraHistoria">

@@ -75,8 +75,8 @@ h3,
 h4,
 h5,
 h6 {
- overflow-wrap: break-word;
- text-wrap: balance;
+ /* overflow-wrap: break-word; */
+ /* text-wrap: balance; */
  font-family: var(--ff1);
  font-weight: normal;
  line-height: 1.2;
@@ -361,6 +361,22 @@ li {
  justify-content: center;
 }
 
+.otherPages {
+ min-height: 60dvh !important;
+ padding-block: 64px;
+ align-items: flex-end !important;
+ justify-content: start !important;
+
+ .header__content {
+  max-width: 67ch;
+  align-items: start !important;
+  justify-content: start !important;
+  text-align: left;
+  gap: 8px;
+ }
+
+}
+
 .header__content {
  width: min(90%, 791px);
  text-align: center;
@@ -539,16 +555,24 @@ fill: #fff; */
 
   &::after {
    content: '';
-   width: 80px;
+   width: 50px;
    aspect-ratio: 1/1;
    /* height: 40px; */
    background: url('../icons/compass.png') center /cover no-repeat;
-   right: -100px;
-   top: 0;
+   top: 89%;
+   left: 137px;
    position: absolute;
    color: white;
    rotate: attr(data-rotate deg);
    transition: rotate .3s ease-in-out;
+
+   @media screen and (min-width: 768px) {
+    width: 80px;
+    right: -100px;
+    top: 0;
+    left: auto;
+
+   }
   }
  }
 
@@ -788,6 +812,10 @@ fill: #fff; */
   font-size: clamp(var(--fzxxl), 2vw + .5rem, var(--fzbig));
   margin-bottom: .2em;
   line-height: 1;
+
+  @media screen and (max-width: 768px) {
+   max-width: 13ch;
+  }
  }
 
  .btn {
